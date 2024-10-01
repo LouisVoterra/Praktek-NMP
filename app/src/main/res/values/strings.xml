@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyLouisWorld</string>
+    <string name="bg_desc">Bikini Bottom</string>
+    <string name="lb_true">TRUE</string>
+    <string name="lb_false">FALSE</string>
+    <string name="helloworld">Hello World</string>
+
+</resources>
