@@ -60,6 +60,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val playerName = intent.getStringExtra(IntroActivity.PLAYER_NAME)
+        binding.txtWelcome.text = playerName
+
         displayQuestions()
 
         binding.btnTrue.setOnClickListener {
