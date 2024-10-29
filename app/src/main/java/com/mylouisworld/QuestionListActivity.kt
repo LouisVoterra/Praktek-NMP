@@ -1,5 +1,6 @@
 package com.mylouisworld
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,5 +22,18 @@ class QuestionListActivity : AppCompatActivity() {
         binding.recQuestion.setHasFixedSize(true)
         binding.recQuestion.adapter = QuestionAdapter()
 
+        binding.fabAdd.setOnClickListener {
+            val intent = Intent(this, NewQuestionActivity::class.java)
+            startActivity(intent)
+        }
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.recQuestion.layoutManager = LinearLayoutManager(this)
+        binding.recQuestion.setHasFixedSize(true)
+        binding.recQuestion.adapter = QuestionAdapter()
     }
 }
