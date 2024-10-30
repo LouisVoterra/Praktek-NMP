@@ -1,6 +1,7 @@
 package com.mylouisworld
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.mylouisworld.databinding.ActivityNewQuestionBinding
+import com.squareup.picasso.Picasso
 
 class NewQuestionActivity : AppCompatActivity() {
 
@@ -73,7 +75,8 @@ class NewQuestionActivity : AppCompatActivity() {
             val imgid = this.resources.getIdentifier(selectedImageName,"drawable",
                 this.packageName)
             val newQuestion = QuestionBank(binding.txtNewQuestion.text.toString(),
-                radioAnswer.text.toString().lowercase().toBoolean(),imgid)
+                radioAnswer.text.toString().lowercase().toBoolean(),imgid,
+                binding.txtURL.text.toString(),binding.checkAvailable.isChecked)
 
             val questionList = QuestionData.questions.toMutableList()
             questionList.add(newQuestion)
@@ -82,6 +85,18 @@ class NewQuestionActivity : AppCompatActivity() {
             Toast.makeText(this, "Question Added Successfully", Toast.LENGTH_SHORT).show()
 
             finish()
+        }
+
+        binding.txtURL.setOnKeyListener { v,keyCode,event ->
+            if(keyCode == KeyEvent.KEYCODE_ENTER) {
+                val url = binding.txtURL.text.toString()
+                val builder = Picasso.Builder(this)
+                builder.listener { picasso, uri, exception ->
+                    exception.printStackTrace()
+                }
+                builder.build().load(url).into(binding.imgPreview)
+            }
+            true
         }
 
 
